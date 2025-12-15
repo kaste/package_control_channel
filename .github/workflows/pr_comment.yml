@@ -3,6 +3,11 @@ on:
   workflow_run:
     workflows: ["Channel Diff and Review"] # must match the phase-1 workflow name
     types: [completed]
+  workflow_dispatch:
+    inputs:
+      run_id:
+        required: true
+        type: string
 
 jobs:
   post-review:
