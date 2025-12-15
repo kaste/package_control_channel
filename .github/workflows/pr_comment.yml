@@ -1,0 +1,22 @@
+name: Post Review Comment
+on:
+  workflow_run:
+    workflows: ["Channel Diff and Review"] # must match the phase-1 workflow name
+    types: [completed]
+
+jobs:
+  post-review:
+    if: ${{ github.event.workflow_run.conclusion != 'skipped' }}
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      issues: write
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+      - name: Post PR comment from artifact
+        uses: kaste/st_package_reviewer/gh_action@pr-comments
+        with:
+          phase: report
+          run_id: ${{ github.event.workflow_run.id }}
