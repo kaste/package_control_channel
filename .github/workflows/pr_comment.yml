@@ -14,7 +14,6 @@ jobs:
       actions: read
       contents: read
     steps:
-      - uses: actions/checkout@v5
       - name: Post PR comment from artifact
         uses: kaste/st_package_reviewer/gh_action@c31b4581d84e7481c38ba0552cf9b7bfb4178b87
         with:
